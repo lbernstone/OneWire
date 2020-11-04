@@ -152,11 +152,12 @@
 #define IO_REG_TYPE uint32_t
 #define IO_REG_BASE_ATTR
 #define IO_REG_MASK_ATTR
-#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(3,9,9)
+#if ESP_IDF_VERSION && ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4,0,0)
 #define RTC_DESC rtc_io_desc
 #else
 #define RTC_DESC rtc_gpio_desc
 #endif
+
 static inline __attribute__((always_inline))
 IO_REG_TYPE directRead(IO_REG_TYPE pin)
 {
