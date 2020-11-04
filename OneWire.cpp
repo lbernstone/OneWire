@@ -153,7 +153,9 @@ sample code bearing this copyright.
 #include "OneWire.h"
 
 #ifdef ARDUINO_ARCH_ESP32
+#undef noInterrupts
 #define noInterrupts() {portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;portENTER_CRITICAL(&mux)
+#undef interrupts
 #define interrupts() portEXIT_CRITICAL(&mux);}
 #endif
 
@@ -618,8 +620,8 @@ uint16_t OneWire::crc16(const uint8_t* input, uint16_t len, uint16_t crc)
 
 
 #ifdef ARDUINO_ARCH_ESP32
-#undef noInterrupts()
-#undef interrupts()
+#undef noInterrupts
+#undef interrupts
 #endif
 
 #endif
