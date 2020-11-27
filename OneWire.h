@@ -161,10 +161,15 @@
 static inline __attribute__((always_inline))
 IO_REG_TYPE directRead(IO_REG_TYPE pin)
 {
+#if CONFIG_IDF_TARGET_ESP32S2
+    if ( pin <= 46 )
+        return (GPIO.in >> pin) & 0x1;
+#else
     if ( pin < 32 )
         return (GPIO.in >> pin) & 0x1;
     else if ( pin < 40 )
         return (GPIO.in1.val >> (pin - 32)) & 0x1;
+#endif
 
     return 0;
 }
